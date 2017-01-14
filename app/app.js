@@ -24,10 +24,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import configureStore from './store';
-
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-
+import { IntlProvider } from 'react-intl';
 // Import CSS reset and Global Styles
 import 'sanitize.css/sanitize.css';
 import './global-styles';
@@ -72,7 +69,7 @@ const rootRoute = {
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
+      <IntlProvider locale="en">  
         <Router
           history={history}
           routes={rootRoute}
@@ -82,7 +79,7 @@ const render = (messages) => {
             applyRouterMiddleware(useScroll())
           }
         />
-      </LanguageProvider>
+      </IntlProvider>
     </Provider>,
     document.getElementById('app')
   );

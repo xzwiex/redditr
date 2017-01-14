@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
+const proxy = require('express-http-proxy');
 
 // Dev middleware
 const addDevMiddlewares = (app, webpackConfig) => {
@@ -30,6 +31,13 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
+
+   app.get(/\/api/, proxy('https://reddit.com', {
+    forwardPath: function(req, res) {
+      console.log('req.url', req.url);
+      return require('url').parse(req.url).path.replace('/api', '');
+    }
+   }));
 
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
