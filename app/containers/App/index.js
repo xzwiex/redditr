@@ -8,34 +8,30 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
+import AntdStyle from 'antd/dist/antd.css';
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import Header from '../../components/Header';
+import Content from '../../components/Content';
+import Footer from '../../components/Footer';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
+import { Layout } from 'antd';
 
 function App(props) {
   return (
-    <AppWrapper>
+    <Layout>
       <Helmet
         titleTemplate="%s - React.js Boilerplate"
         defaultTitle="React.js Boilerplate"
         meta={[
           { name: 'description', content: 'A React.js Boilerplate application' },
         ]}
-      />
-      <Header />
-      {React.Children.toArray(props.children)}
+        />
+      <Header/>
+      <Content>
+          {React.Children.toArray(props.children)}
+      </Content>
       <Footer />
-    </AppWrapper>
+    </Layout>
   );
 }
 

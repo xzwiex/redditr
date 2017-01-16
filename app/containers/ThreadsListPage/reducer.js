@@ -6,15 +6,25 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
-} from './constants';
+  fetchThreads,
+} from './actions';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  loading: false,
+  threads: [],
+});
 
 function threadsListPageReducer(state = initialState, action) {
+  console.log('threadsListPageReducer', action);
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case fetchThreads.REQUEST:
+      return state
+        .set('loading', true)
+        .set('threads', fromJS([]));
+    case fetchThreads.SUCCESS:
+      return state
+        .set('loading', false)
+        .set('threads', fromJS(action.payload));
     default:
       return state;
   }

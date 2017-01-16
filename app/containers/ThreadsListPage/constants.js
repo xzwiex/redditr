@@ -4,4 +4,4 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/ThreadsListPage/DEFAULT_ACTION';
+export const FETCH_THREADS = 'app/ThreadsListPage/FETCH_THREADS';

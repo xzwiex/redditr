@@ -1,0 +1,11 @@
+// import ThreadsList from '../index';
+
+import expect from 'expect';
+// import { shallow } from 'enzyme';
+// import React from 'react';
+
+describe('<ThreadsList />', () => {
+  it('Expect to have unit tests specified', () => {
+    expect(true).toEqual(false);
+  });
+});

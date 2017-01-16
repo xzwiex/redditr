@@ -14,7 +14,7 @@ module.exports = (options) => ({
   module: {
     loaders: [{
       test: /\.js$/, // Transform all .js files required somewhere with Babel
-      loader: 'babel',
+      loader: 'babel-loader',
       exclude: /node_modules/,
       query: options.babelQuery,
     }, {
@@ -49,7 +49,7 @@ module.exports = (options) => ({
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
       // make fetch available
-      fetch: 'exports?self.fetch!whatwg-fetch',
+      fetch: 'exports-loader?self.fetch!whatwg-fetch',
     }),
 
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
@@ -61,6 +61,20 @@ module.exports = (options) => ({
       },
     }),
     new webpack.NamedModulesPlugin(),
+    // restrict the extra locales that moment.js can load; en is always builtin
+    new webpack.ContextReplacementPlugin(/^\.\/locale$/, context => {
+      // check if the context was created inside the moment package
+      if (!/\/moment\//.test(context.context)) { return }
+      // context needs to be modified in place
+      Object.assign(context, {
+        // include only japanese, korean and chinese variants
+        // all tests are prefixed with './' so this must be part of the regExp
+        // the default regExp includes everything; /^$/ could be used to include nothing
+        regExp: /^\.\/(ja|ko|zh)/,
+        // point to the locale data folder relative to moment/src/lib/locale
+        request: '../../locale'
+      })
+    })
   ]),
   resolve: {
     modules: ['app', 'node_modules'],

@@ -19,7 +19,19 @@ const selectThreadsListPage = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const selectThreads = () => createSelector(
+  selectThreadsListPageDomain(),
+  (page) => page.get('threads')
+);
+
+const selectLoading = () => createSelector(
+  selectThreadsListPageDomain(),
+  (page) => page.get('loading')
+);
+
 export default selectThreadsListPage;
 export {
   selectThreadsListPageDomain,
+  selectThreads,
+  selectLoading,
 };

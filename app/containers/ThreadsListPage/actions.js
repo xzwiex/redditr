@@ -3,13 +3,12 @@
  * ThreadsListPage actions
  *
  */
-
-import {
-  DEFAULT_ACTION,
+import { createAction } from 'redux-saga-actions';
+ import {
+  FETCH_THREADS,
 } from './constants';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+// create action 
+export const fetchThreads = createAction(FETCH_THREADS);
+
+

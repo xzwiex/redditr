@@ -18,7 +18,7 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/',
+      path: '/(r/:subreddit)',
       name: 'threadslist',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

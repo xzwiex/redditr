@@ -1,21 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Layout } from 'antd';
 
-
-import Wrapper from './Wrapper';
 import messages from './messages';
+
+const AntdFoooter = Layout.Footer;
 
 function Footer() {
   return (
-    <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-      </section>
-      <section>
-      </section>
-    </Wrapper>
+    <AntdFoooter style={{ textAlign: 'center' }}>
+      <FormattedMessage {...messages.footerText} />
+    </AntdFoooter>
   );
 }
 
