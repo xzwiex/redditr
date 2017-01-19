@@ -1,4 +1,4 @@
-import { take, call, put, select } from 'redux-saga/effects';
+import { take, call, put, select, cancel } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { fetchThreads } from './actions';
@@ -14,7 +14,6 @@ export function* fetchThreadsHandler(data) {
 }
 
 export function* fetchThreadsSaga() {
-  console.log('fetchThreadsSaga started');
   const watcher = yield call(takeEvery, fetchThreads.REQUEST, fetchThreadsHandler);
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);

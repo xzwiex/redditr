@@ -1,27 +1,28 @@
 /*
  *
- * ThreadsListPage reducer
+ * UserThreadsPage reducer
  *
  */
 
 import { fromJS } from 'immutable';
 import {
-  fetchThreads,
+  fetchUserThreads,
 } from './actions';
 
 const initialState = fromJS({
-  loading: false,
   threads: [],
+  loading: false,
 });
 
-function threadsListPageReducer(state = initialState, action) {
+function userThreadsPageReducer(state = initialState, action) {
   console.log('action', action);
+
   switch (action.type) {
-    case fetchThreads.REQUEST:
+    case fetchUserThreads.REQUEST:
       return state
         .set('loading', true)
         .set('threads', fromJS([]));
-    case fetchThreads.SUCCESS:
+    case fetchUserThreads.SUCCESS:
       return state
         .set('loading', false)
         .set('threads', fromJS(action.payload));
@@ -30,4 +31,4 @@ function threadsListPageReducer(state = initialState, action) {
   }
 }
 
-export default threadsListPageReducer;
+export default userThreadsPageReducer;

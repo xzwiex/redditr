@@ -23,7 +23,7 @@ function ThreadsList(props) {
     <div>
       {props.data.map((thread) => 
         <Container key={thread.data.id} >
-          <ThreadsListElement {...thread.data} />
+          <ThreadsListElement {...thread.data} kind={thread.kind} />
         </Container>
       )}
     </div>

@@ -39,5 +39,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     },
+    {
+      path: '/u/:user',
+      name: 'userThreadsPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/UserThreadsPage/reducer'),
+          System.import('containers/UserThreadsPage/sagas'),
+          System.import('containers/UserThreadsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('userThreadsPage', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
   ];
 }
